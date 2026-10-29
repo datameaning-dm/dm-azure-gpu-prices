@@ -79,8 +79,15 @@ jobs:
           pip install -q "kaggle==1.8.4"
           mkdir -p "$RUNNER_TEMP/kaggle"
           cp gpu_specs.csv data/azure_gpu_vm_prices.csv data/azure_gpu_vm_summary.csv "$RUNNER_TEMP/kaggle/"
-          sed "s/KAGGLE_USERNAME/$KAGGLE_USERNAME/" kaggle/dataset-metadata.json > "$RUNNER_TEMP/kaggle/dataset-metadata.json"
-          if kaggle datasets status "$KAGGLE_USERNAME/$KAGGLE_SLUG" >/dev/null 2>&1; then
+          # the username alone, even if the secret holds a profile address such as kaggle.com/<name>/
+          user="${KAGGLE_USERNAME%/}"; user="${user##*/}"
+          python3 - "$user" "$RUNNER_TEMP/kaggle/dataset-metadata.json" <<'EOF'
+          import json, sys
+          meta = json.load(open("kaggle/dataset-metadata.json"))
+          meta["id"] = meta["id"].replace("KAGGLE_USERNAME", sys.argv[1])
+          json.dump(meta, open(sys.argv[2], "w"), indent=2)
+          EOF
+          if kaggle datasets status "$user/$KAGGLE_SLUG" >/dev/null 2>&1; then
             kaggle datasets version -p "$RUNNER_TEMP/kaggle" -m "Prices fetched $(date -u +%Y-%m-%d)"
           else
             kaggle datasets create -p "$RUNNER_TEMP/kaggle" --public
