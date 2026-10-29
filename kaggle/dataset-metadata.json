@@ -1,8 +1,8 @@
 {
   "title": "Azure GPU VM Prices per Hour by Region",
   "id": "KAGGLE_USERNAME/azure-gpu-vm-prices",
-  "subtitle": "Every Azure GPU VM size and region, Linux, Windows, Spot and savings plans, weekly",
-  "description": "Microsoft Azure list prices per hour for every GPU virtual machine size (NC, ND, NG and NV series) in every region, from Microsoft's public Azure Retail Prices API, refreshed every Monday. Linux and Windows pay-as-you-go, Spot, and the 1-year and 3-year savings-plan rates the API lists, plus GPU count, GPU model and GPU memory per size from Microsoft Learn. Source code, checks and history: https://github.com/datameaning-dm/dm-azure-gpu-prices. Explained at https://www.datameaning.com/guides/azure-gpu-vm-prices/. List prices only: no disks, network, egress or negotiated discounts.",
+  "subtitle": "Every Azure GPU VM size and region: on-demand, Spot, savings plans, weekly",
+  "description": "Microsoft Azure list prices per hour for every GPU virtual machine size (NC, ND, NG and NV series) in every region, from Microsoft's public Azure Retail Prices API, checked every Monday. Linux and Windows pay-as-you-go, Spot, and the 1-year and 3-year savings-plan rates the API lists, plus GPU count, GPU model and GPU memory from Microsoft Learn for the sizes Microsoft documents (blank for the others). Source code, checks and history: https://github.com/datameaning-dm/dm-azure-gpu-prices. Explained at https://www.datameaning.com/guides/azure-gpu-vm-prices/. List prices only: no disks, network, egress or negotiated discounts.",
   "licenses": [{"name": "CC-BY-4.0"}],
   "keywords": ["cloud computing", "gpu", "pricing"]
 }
