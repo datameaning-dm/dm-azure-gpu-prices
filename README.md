@@ -15,7 +15,7 @@ configs:
 # Azure GPU VM prices per hour, every size and region
 
 Microsoft Azure list prices per hour for every GPU virtual machine size (NC, ND, NG and NV series) in
-every region, refreshed every Monday from Microsoft's public
+every region, checked every Monday against Microsoft's public
 [Azure Retail Prices API](https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices).
 
 Read it as a page, with the cheapest region for each GPU:
