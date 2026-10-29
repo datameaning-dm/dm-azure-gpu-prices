@@ -2,7 +2,7 @@ name: Weekly refresh
 
 # Every Monday: ask Microsoft's Retail Prices API again, run every check, and commit the new prices only
 # if all of them pass. Then mirror the same files to Hugging Face and Kaggle, each only when its token is
-# set as a repository secret (HF_TOKEN; KAGGLE_USERNAME and KAGGLE_KEY), so a missing token skips that
+# set as a repository secret (HF_TOKEN; KAGGLE_USERNAME and KAGGLE_API_TOKEN), so a missing token skips that
 # mirror instead of failing the refresh.
 
 on:
@@ -25,7 +25,7 @@ jobs:
       HF_REPO: datameaning/azure-gpu-vm-prices
       KAGGLE_SLUG: azure-gpu-vm-prices
       HAS_HF: ${{ secrets.HF_TOKEN != '' }}
-      HAS_KAGGLE: ${{ secrets.KAGGLE_KEY != '' && secrets.KAGGLE_USERNAME != '' }}
+      HAS_KAGGLE: ${{ secrets.KAGGLE_API_TOKEN != '' && secrets.KAGGLE_USERNAME != '' }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
@@ -73,10 +73,10 @@ jobs:
         if: steps.commit.outputs.changed == 'true' && env.HAS_KAGGLE == 'true'
         env:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}   # Kaggle's newer API token; needs kaggle>=1.8
         shell: bash
         run: |
-          pip install -q "kaggle==1.6.17"
+          pip install -q "kaggle==1.8.4"
           mkdir -p "$RUNNER_TEMP/kaggle"
           cp gpu_specs.csv data/azure_gpu_vm_prices.csv data/azure_gpu_vm_summary.csv "$RUNNER_TEMP/kaggle/"
           sed "s/KAGGLE_USERNAME/$KAGGLE_USERNAME/" kaggle/dataset-metadata.json > "$RUNNER_TEMP/kaggle/dataset-metadata.json"
