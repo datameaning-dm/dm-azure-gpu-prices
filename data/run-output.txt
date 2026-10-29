@@ -1,6 +1,6 @@
 python 3.12.15
-source  https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview fetched 2026-10-29T21:09:20Z: 8313 rows in 9 pages
-prices  data/raw/azure_retail_prices_n_series.csv: 8313 data lines, fetched 2026-10-29T21:09:20Z
+source  https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview fetched 2026-10-29T21:33:21Z: 8313 rows in 9 pages
+prices  data/raw/azure_retail_prices_n_series.csv: 8313 data lines, fetched 2026-10-29T21:33:21Z
 specs   gpu_specs.csv: 104 sizes ( 30, fpga 3, gpu 70, media 1)
 rows by meter class: linux 1669, linux spot 1549, low priority 1884, windows 1664, windows spot 1547
 sizes   104 priced; 100 GPU sizes kept; 4 left out as FPGA or media accelerator: Standard_NM16ads_MA35D, Standard_NP10s, Standard_NP20s, Standard_NP40s
