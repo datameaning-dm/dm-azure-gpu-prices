@@ -94,8 +94,7 @@ def fetch(snapshot_out):
             w.writerow({"fetched_at": fetched_at, "savingsPlan1y": sp.get("1 Year", ""),
                         "savingsPlan3y": sp.get("3 Years", ""),
                         **{k: i.get(k, "") for k in RAW_FIELDS if k not in ("fetched_at", "savingsPlan1y", "savingsPlan3y")}})
-    os.replace(tmp, snapshot_out)
-    return snapshot_out
+    return tmp   # moved to snapshot_out only after every check passes
 
 
 def meter_class(r):
@@ -106,6 +105,14 @@ def meter_class(r):
     # Windows meters end "Windows", except the NCCadsv5 ones, which end "Srs Win"
     return ("windows" if r["productName"].endswith((" Windows", " Win")) else "linux") + \
            (" spot" if "Spot" in r["skuName"] else "")
+
+
+def kind(sku, specs):
+    """gpu, fpga or media: the specs row says, else the size prefix (NP is FPGA, NM a media accelerator)."""
+    k = specs.get(sku, {}).get("accelerator_kind")
+    if k:
+        return k
+    return "fpga" if sku.startswith("Standard_NP") else "media" if sku.startswith("Standard_NM") else "gpu"
 
 
 def region_type(code):
@@ -174,12 +181,12 @@ def main():
         ap.error("plant faults only run from a --snapshot, so the live API is never touched with a fault")
     print(f"python {sys.version.split()[0]}")
 
-    snapshot = a.snapshot or fetch(a.snapshot_out)
+    snapshot = a.snapshot or fetch(a.snapshot_out)   # a live fetch is read from its .part file
     with open(snapshot, "rb") as f:
         file_lines = f.read().count(b"\n") - 1
     raw = plant_faults(read_csv(snapshot), plant)
     fetched = sorted({r["fetched_at"] for r in raw})
-    print(f"prices  {snapshot}: {file_lines} data lines, fetched {', '.join(fetched)}")
+    print(f"prices  {a.snapshot_out or snapshot}: {file_lines} data lines, fetched {', '.join(fetched)}")
 
     specs = {s["sku"].strip(): s for s in read_csv(SPECS)}   # one API size name ends in spaces
     kinds = {}
@@ -236,7 +243,7 @@ def main():
     if unmapped:
         warnings.append(f"{len(unmapped)} size(s) priced by the API are not in gpu_specs.csv yet, published with "
                         f"blank specs: " + ", ".join(unmapped))
-    gpu_skus = [s for s in skus if (specs.get(s, {}).get("accelerator_kind") or "gpu") == "gpu"]   # blank: an N size, a GPU
+    gpu_skus = [s for s in skus if kind(s, specs) == "gpu"]
     left_out = [s for s in skus if s not in gpu_skus]
     print(f"sizes   {len(skus)} priced; {len(gpu_skus)} GPU sizes kept; {len(left_out)} left out as "
           f"FPGA or media accelerator: {', '.join(left_out) or 'none'}")
@@ -326,6 +333,9 @@ def main():
           f"its price, no Spot price above pay-as-you-go; {len(out_rows)} size and region rows for {len(summary)} "
           f"GPU sizes in {len({r['region'] for r in out_rows})} regions")
 
+    if a.snapshot_out:
+        os.replace(snapshot, a.snapshot_out)
+        print(f"wrote {a.snapshot_out}")
     os.makedirs(a.out, exist_ok=True)
     for name, fields, rows in (("azure_gpu_vm_prices.csv", PRICE_FIELDS, out_rows),
                                ("azure_gpu_vm_summary.csv", SUMMARY_FIELDS, summary)):
