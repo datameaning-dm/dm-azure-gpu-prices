@@ -21,9 +21,8 @@ every region, refreshed every Monday from Microsoft's public
 Read it as a page, with the cheapest region for each GPU:
 https://www.datameaning.com/guides/azure-gpu-vm-prices/
 
-Mirrors of the same files: [Hugging Face](https://huggingface.co/datasets/datameaning/azure-gpu-vm-prices)
-and [Kaggle](https://www.kaggle.com/datasets). The copy here, on GitHub, is the source: every weekly
-change is a commit, so the price history is the git history.
+The copy here, on GitHub, is the source: every weekly change is a commit, so the price history is the
+git history.
 
 ## Files
 
@@ -35,7 +34,8 @@ change is a commit, so the price history is the git history.
 | `data/raw/azure_retail_prices_n_series.csv` | API row | the API's answer as fetched, so every number can be re-run |
 | `data/run-output.txt` | run | what the last run printed, checks included |
 
-Prices are USD per hour as the API lists them. `fetched_at` says when.
+Prices are USD per hour as the API lists them. `fetched_at` says when. `region_type` marks Azure
+Government regions and operator edge zones; the summary uses public regions.
 
 ## Re-run it
 
