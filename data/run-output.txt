@@ -1,6 +1,6 @@
 python 3.12.15
-source  https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview fetched 2026-10-29T20:29:41Z: 8313 rows in 9 pages
-prices  data/raw/azure_retail_prices_n_series.csv: 8313 data lines, fetched 2026-10-29T20:29:41Z
+source  https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview fetched 2026-10-29T21:05:48Z: 8313 rows in 9 pages
+prices  data/raw/azure_retail_prices_n_series.csv: 8313 data lines, fetched 2026-10-29T21:05:48Z
 specs   gpu_specs.csv: 104 sizes ( 30, fpga 3, gpu 70, media 1)
 rows by meter class: linux 1669, linux spot 1549, low priority 1884, windows 1664, windows spot 1547
 sizes   104 priced; 100 GPU sizes kept; 4 left out as FPGA or media accelerator: Standard_NM16ads_MA35D, Standard_NP10s, Standard_NP20s, Standard_NP40s
@@ -109,5 +109,6 @@ Linux pay-as-you-go, USD per hour as the API lists it, 100 GPU sizes, public reg
        Standard_ND128isrf_NDR_GB200_v6                           -      -        -        1     124.4      124.4     124.4           -       24.88          -          koreasouth
 
 SELF-CHECK PASSED: 8313 price rows equal the 8313 data lines of the file, one fetch time, one row per size, region and meter, every price above zero in USD per hour, no savings-plan rate above its price, no Spot price above pay-as-you-go; 1646 size and region rows for 100 GPU sizes in 60 regions
+wrote data/raw/azure_retail_prices_n_series.csv
 wrote data/azure_gpu_vm_prices.csv
 wrote data/azure_gpu_vm_summary.csv
