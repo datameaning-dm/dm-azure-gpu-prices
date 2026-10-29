@@ -21,7 +21,8 @@ every region, checked every Monday against Microsoft's public
 Read it as a page, with the cheapest region for each GPU:
 https://www.datameaning.com/guides/azure-gpu-vm-prices/
 
-A copy is on [Kaggle](https://www.kaggle.com/datasets/datameaning/azure-gpu-vm-prices), updated by the same weekly run.
+Copies are on [Hugging Face](https://huggingface.co/datasets/datameaning/azure-gpu-vm-prices) and
+[Kaggle](https://www.kaggle.com/datasets/datameaning/azure-gpu-vm-prices), updated by the same weekly run.
 The copy here, on GitHub, is the source: every weekly change is a commit, so the price history is the
 git history.
 
