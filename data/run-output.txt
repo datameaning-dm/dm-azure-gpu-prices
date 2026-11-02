@@ -1,6 +1,7 @@
 python 3.12.15
-source  https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview fetched 2026-10-29T21:33:21Z: 8313 rows in 9 pages
-prices  data/raw/azure_retail_prices_n_series.csv: 8313 data lines, fetched 2026-10-29T21:33:21Z
+        HTTP 429, retry-after 60s
+source  https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview fetched 2026-11-02T05:27:00Z: 8313 rows in 9 pages
+prices  data/raw/azure_retail_prices_n_series.csv: 8313 data lines, fetched 2026-11-02T05:27:00Z
 specs   gpu_specs.csv: 104 sizes ( 30, fpga 3, gpu 70, media 1)
 rows by meter class: linux 1669, linux spot 1549, low priority 1884, windows 1664, windows spot 1547
 sizes   104 priced; 100 GPU sizes kept; 4 left out as FPGA or media accelerator: Standard_NM16ads_MA35D, Standard_NP10s, Standard_NP20s, Standard_NP40s
@@ -70,7 +71,7 @@ Linux pay-as-you-go, USD per hour as the API lists it, 100 GPU sizes, public reg
   Standard_NC132ds_xl_RTXPRO6000BSE_v6                           -      -        -       14      6.38      8.294     9.257           -    1.179024     3.9556              eastus
   Standard_NC144ds_xl_RTXPRO6000BSE_v6  NVIDIA RTX PRO 6000 Blackw      1       96       23      6.38      8.294     9.257        6.38    1.179024     3.9556           centralus
                Standard_NV72ads_A10_v5                  NVIDIA A10      2       24       37      6.52      8.476     13.04        3.26    1.204896   4.022188           centralus
-              Standard_NC40ads_H100_v5             NVIDIA H100 NVL      1       94       28      6.98      9.074    10.121        6.98    1.289904   4.305962              eastus
+              Standard_NC40ads_H100_v5             NVIDIA H100 NVL      1       94       28      6.98      9.074    10.121        6.98    1.418336   4.305962              eastus
              Standard_NCC40ads_H100_v5             NVIDIA H100 NVL      1       94        4      6.98       7.89       8.9        6.98    1.289904   4.305962             eastus2
               Standard_NC48ads_A100_v4            NVIDIA A100 PCIe      2       80       27     7.346       9.55    14.692       3.673    1.357541   4.531747              eastus
  Standard_NC256lds_xl_RTXPRO6000BSE_v6  NVIDIA RTX PRO 6000 Blackw      -        -        7        11         11      15.4           -      2.0328       6.82           centralus
@@ -82,7 +83,7 @@ Linux pay-as-you-go, USD per hour as the API lists it, 100 GPU sizes, public reg
   Standard_NC256ds_xl_RTXPRO6000BSE_v6  NVIDIA RTX PRO 6000 Blackw      -        -        7     12.76      12.76    18.247           -    2.358048     7.9112           centralus
   Standard_NC264ds_xl_RTXPRO6000BSE_v6                           -      -        -       14     12.76     16.588    18.514           -    2.358048     7.9112              eastus
                     Standard_NC24rs_v3           NVIDIA Tesla V100      4       16       23     13.46     17.503    26.928       3.365    2.487408   7.162066              eastus
-             Standard_NC80adis_H100_v5             NVIDIA H100 NVL      2       94       28     13.96     18.148    20.242        6.98    2.579808   8.611924              eastus
+             Standard_NC80adis_H100_v5             NVIDIA H100 NVL      2       94       28     13.96     18.148    20.242        6.98    2.836672   8.611924              eastus
  Standard_NC320lds_xl_RTXPRO6000BSE_v6  NVIDIA RTX PRO 6000 Blackw      -        -        7      14.3       14.3     20.02           -     2.64264      8.866           centralus
  Standard_NC324lds_xl_RTXPRO6000BSE_v6                           -      -        -       14      14.3      18.59    20.748           -     2.64264      8.866              eastus
  Standard_NC336lds_xl_RTXPRO6000BSE_v6  NVIDIA RTX PRO 6000 Blackw      -        -       23      14.3      18.59    20.748           -        2.86      8.866           centralus
@@ -94,7 +95,7 @@ Linux pay-as-you-go, USD per hour as the API lists it, 100 GPU sizes, public reg
               Standard_ND96asr_A100_v4                           -      -        -        6    27.197    29.9135    35.357           -     5.98334  13.625697              eastus
                    Standard_ND96asr_v4                 NVIDIA A100      8       40        5    27.197      32.63    35.357    3.399625    5.904469  13.625697              eastus
               Standard_ND96ams_A100_v4                           -      -        -       28     32.77     44.895     65.54           -    8.441552  17.010907              eastus
-             Standard_ND96amsr_A100_v4                 NVIDIA A100      8       80       29     32.77     42.601     65.54     4.09625    7.631883  17.010907              eastus
+             Standard_ND96amsr_A100_v4                 NVIDIA A100      8       80       29     32.77     42.601     65.54     4.09625    6.869065  17.010907              eastus
              Standard_ND96is_MI300X_v5                           -      -        -       17        48         60        96           -      8.8704          -             eastus2
             Standard_ND96isr_MI300X_v5         AMD Instinct MI300X      8      192       17        48         60        96           6      8.8704          -             eastus2
               Standard_ND96isr_H200_v5                 NVIDIA H200      8      141       29      84.8     110.24     169.6        10.6        84.8          -             eastus2
